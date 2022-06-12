@@ -2,7 +2,7 @@
 const Paciente = () => {
   return (
    
-       <div className='shadow-md bg-white m-3 px-5 py-10 rounded-xl'>
+       <div className= 'mx-5 my-10 shadow-md bg-white px-5 py-10 rounded-xl'>
           <p className='text-grey-700 font-bold uppercase mb-3'>Propietario: 
                <span className='normal-case font-normal'>jordi</span>
           </p>
