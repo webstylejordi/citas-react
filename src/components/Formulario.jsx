@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Error from './Error';
 
 const Formulario = ({pacientes, setPacientes}) => {
 
@@ -9,6 +10,15 @@ const Formulario = ({pacientes, setPacientes}) => {
   const [sintomas, setSintomas]=useState('');
 
   const [error, setError]= useState(false)
+
+
+  const GenerarId = () =>  {
+    const random = Math.random().toString(36).substr(2)
+    const fecha = Date.now().toString(36)
+    return  fecha + random 
+
+  }
+
 
 
   const handleSubmit = (e) =>  {
@@ -28,17 +38,19 @@ const Formulario = ({pacientes, setPacientes}) => {
         propietario,
         email,
         fecha,
-        sintomas
-      }
+        sintomas,
+        id:GenerarId()
+      };
 
-      setPacientes([...pacientes, objetoPaciente])
+      setPacientes([...pacientes, objetoPaciente]);
 
       //reiniciar el form 
-      setNombre('')
-      setPropietario('')
-      setEmail('')
-      setFecha('')
-      setSintomas('')
+      
+      setNombre('');
+      setPropietario('');
+      setEmail('');
+      setFecha('');
+      setSintomas('');
      
   }
 
@@ -56,20 +68,19 @@ const Formulario = ({pacientes, setPacientes}) => {
       className='bg-white shadow-md rounded-lg py-10 px-5 mb-10' 
       onSubmit={handleSubmit}
       >
-        {error && (
-          <div className='bg-red-800  text-white text-center p-3 uppercase font-bold m-3 rounded-md'>
-            <p>Alerta: Todos los campos son obligarorios</p>
-            </div>
-            ) }
+        {error &&    <Error>todos los campos son obligatorios</Error>   }
+
+
           <div className='mb-5'>
-              <label htmlFor='mascota' className='block text-gray-700 uppercase font-bold'>
+              <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>
                 Nombre de la mascota  
                 </label>
               <input 
-              id="mascota"
+              id="nombre"
               type="text"
               placeholder='nombre mascota'
               className='border-2 w-full p-2 mt-2  placeholder-gray-400 rounded-md'
+              value={nombre}
               onChange={ (e)  => setNombre(e.target.value)}
               />
           </div>
