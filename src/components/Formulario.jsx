@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
 
-const Formulario = ({pacientes, setPacientes}) => {
+const Formulario = ({pacientes, setPacientes, paciente}) => {
 
   const [nombre, setNombre]=useState('');
   const [propietario, setPropietario]=useState('');
@@ -9,8 +9,31 @@ const Formulario = ({pacientes, setPacientes}) => {
   const [fecha, setFecha]=useState('');
   const [sintomas, setSintomas]=useState('');
 
-  const [error, setError]= useState(false)
+  const [error, setError]= useState(false);
 
+  useEffect( () =>  {
+      if (Object.keys(paciente).length > 0 ) {
+          setNombre(paciente.nombre)
+          setPropietario(paciente.propietario)
+          setEmail(paciente.email)
+          setFecha(paciente.fecha)
+          setSintomas(paciente.sintomas)
+      }
+  }  , [paciente]  )
+
+  
+/*
+  
+ useEffect( () => {
+    if ( object.keys(paciente).length > 0 ) {
+        console.log("Si, hay algo")
+    } else {
+        console.log("Si, hay algo")
+    }
+
+  },  [paciente] );
+*/
+ 
 
   const GenerarId = () =>  {
     const random = Math.random().toString(36).substr(2)
@@ -70,7 +93,7 @@ const Formulario = ({pacientes, setPacientes}) => {
       >
         {error &&    <Error>todos los campos son obligatorios</Error>   }
 
-
+ 
           <div className='mb-5'>
               <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>
                 Nombre de la mascota  
