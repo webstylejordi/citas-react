@@ -1,7 +1,7 @@
 
 import Paciente from './Paciente';
 
-const ListadoPacientes = ({pacientes, setPaciente, paciente}) => {
+const ListadoPacientes = ({pacientes, setPaciente, eliminarPaciente}) => {
 
 
       
@@ -25,7 +25,7 @@ const ListadoPacientes = ({pacientes, setPaciente, paciente}) => {
                     key = {paciente.id}
                     paciente = {paciente}
                     setPaciente = {setPaciente}
-
+                    eliminarPaciente = {eliminarPaciente}
                
                     />
 

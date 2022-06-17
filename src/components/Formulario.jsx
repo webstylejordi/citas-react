@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
+import Paciente from './paciente';
 
-const Formulario = ({pacientes, setPacientes, paciente}) => {
+const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
   const [nombre, setNombre]=useState('');
   const [propietario, setPropietario]=useState('');
@@ -21,18 +22,6 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
       }
   }  , [paciente]  )
 
-  
-/*
-  
- useEffect( () => {
-    if ( object.keys(paciente).length > 0 ) {
-        console.log("Si, hay algo")
-    } else {
-        console.log("Si, hay algo")
-    }
-
-  },  [paciente] );
-*/
  
 
   const GenerarId = () =>  {
@@ -64,8 +53,22 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
         sintomas,
         id:GenerarId()
       };
+ 
+      if (paciente.id) {
+        //editand registro
+        objetoPaciente.id = paciente.id 
+        const pacientesActualizados =  pacientes.map( pacienteState => pacienteState.id === 
+          paciente.id ? objetoPaciente :pacienteState )
+          setPacientes(pacientesActualizados)
+          setPaciente({})
 
-      setPacientes([...pacientes, objetoPaciente]);
+      } else {
+        //nuevo registro
+        objetoPaciente.id = GenerarId() 
+        setPacientes([...pacientes, objetoPaciente]);
+      }
+
+      
 
       //reiniciar el form 
       
@@ -156,7 +159,7 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
           <input 
             type="submit"
             className='text-white uppercase font-bold bg-indigo-600 w-full p-3 hover:bg-indigo-800 cursor-pointer transition-all rounded-md'
-            value="agregar paciente"
+            value= {paciente.id ?  "editar paciente"  : "agregar paciente"   }
           />
 
       </form>

@@ -1,9 +1,17 @@
 import { useEffect } from "react"
-const Paciente = ({paciente, setPaciente}) => {
+const Paciente = ({paciente, setPaciente, eliminarPaciente}) => {
 
 
  
-   const {nombre, propietario, email, fecha , sintomas} = paciente
+   const {nombre, propietario, email, fecha , sintomas, id} = paciente
+
+   const handleEliminar = () => {
+     const respuesta = confirm("realmene deseas eliminar este pacient4v ?")
+          if (respuesta) {
+               eliminarPaciente(id)
+          }  
+     }
+
   return (
 
    
@@ -36,6 +44,7 @@ const Paciente = ({paciente, setPaciente}) => {
 
           <button
                className="bg-red-600 px-4 py-2 font-bold rounded-lg text-white uppercase hover:bg-red-800 cursor-pointer"
+               onClick = {handleEliminar}
                >Eliminiar</button>
           </div>
     </div>

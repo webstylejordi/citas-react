@@ -7,6 +7,10 @@ import ListadoPacientes from './components/ListadoPacientes';
 function App() {
   const [pacientes, setPacientes]=useState([]);
   const [paciente, setPaciente]=useState({});
+
+  const eliminarPaciente = (id) => {
+    console.log("eliminando paciente " , id);
+  }
  
 
   return (
@@ -17,11 +21,13 @@ function App() {
            pacientes = {pacientes}
            setPacientes= {setPacientes}
            paciente = {paciente}
+           setPaciente = {setPaciente}
    
         />
         <ListadoPacientes
           pacientes = {pacientes}
-          setPaciente = {setPaciente} //para modificiar o eliminar un solo paciente
+          setPaciente = {setPaciente} //para modificiar un solo paciente
+          eliminarPaciente ={eliminarPaciente}
 
         />
       </div>
